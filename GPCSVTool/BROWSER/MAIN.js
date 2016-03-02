@@ -25,6 +25,11 @@ GPCSVTool.MAIN = METHOD({
 					table.empty();
 					
 					GET('__RF/GPCSVTool/' + fileData.id, function(content) {
+						
+						var
+						// array
+						array = [];
+						
 						EACH(content.split('\n'), function(line, i) {
 							
 							var
@@ -50,25 +55,36 @@ GPCSVTool.MAIN = METHOD({
 							}
 							
 							else if (isNaN(split[0]) === true) {
-								table.append(TR({
-									c : [TD({
-										c : (split[1] + split[2] + ' ' + split[3]).replace(/"/g, '')
-									}), TD({
-										c : split[8]
-									}), TD({
-										c : split[10]
-									}), TD({
-										c : split[12]
-									}), TD({
-										c : split[5]
-									}), TD({
-										c : isNaN(split[19]) === true ? split[20] : split[19]
-									})]
-								}));
-								
-								total += isNaN(split[19]) === true ? split[20] : split[19];
+								array.push(split);
 							}
 						});
+						
+						array.sort(function(a, b) {
+							return a[8].localeCompare(b[8]);
+						});
+						
+						EACH(array, function(split, i) {
+							
+							table.append(TR({
+								c : [TD({
+									c : (split[1] + split[2] + ' ' + split[3]).replace(/"/g, '')
+								}), TD({
+									c : split[8]
+								}), TD({
+									c : split[10]
+								}), TD({
+									c : split[12]
+								}), TD({
+									c : split[5]
+								}), TD({
+									c : isNaN(split[19]) === true ? split[20] : split[19]
+								})]
+							}));
+							
+							total += REAL(isNaN(split[19]) === true ? split[20] : split[19]);
+						});
+						
+						table.append(total);
 					});
 				}
 			}), table = TABLE()]
