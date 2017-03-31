@@ -8,6 +8,6 @@ BOOT({
 	},
 	NODE_CONFIG : {
 		isNotUsingCPUClustering : true,
-		dbName : 'GPCSVTool-test'
+		dbName : 'GPCSVTool'
 	}
 });
