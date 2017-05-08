@@ -41,9 +41,7 @@ GPCSVTool.MAIN = METHOD({
 									c : [TH({
 										c : '일자'
 									}), TH({
-										c : 'Type'
-									}), TH({
-										c : 'Key'
+										c : '이름'
 									}), TH({
 										c : '국가'
 									}), TH({
@@ -60,7 +58,7 @@ GPCSVTool.MAIN = METHOD({
 						});
 						
 						array.sort(function(a, b) {
-							return a[8].localeCompare(b[8]);
+							return a[7].localeCompare(b[7]);
 						});
 						
 						EACH(array, function(split, i) {
@@ -69,9 +67,7 @@ GPCSVTool.MAIN = METHOD({
 								c : [TD({
 									c : (split[1] + split[2] + ' ' + split[3]).replace(/"/g, '')
 								}), TD({
-									c : split[8]
-								}), TD({
-									c : split[10]
+									c : split[7]
 								}), TD({
 									c : split[12]
 								}), TD({
